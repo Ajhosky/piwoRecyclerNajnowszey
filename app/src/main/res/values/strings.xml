@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">piwo</string>
+
+
+    <string-array name="beer_names">
+        <item>IPA</item>
+        <item>Stout</item>
+        <item>Pilsner</item>
+        <item>Lager</item>
+        <item>Wheat Beer</item>
+        <item>Porter</item>
+        <item>Sour Ale</item>
+        <item>Amber Ale</item>
+        <item>Pale Ale</item>
+        <!-- Dodaj pozostałe nazwy piw -->
+    </string-array>
+
+
+</resources>
