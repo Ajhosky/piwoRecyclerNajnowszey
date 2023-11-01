@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,12 +63,12 @@ public class MainActivity extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<String> beerToDisplay = new ArrayList<>();
+                Dictionary<String,Integer> beerToDisplay = new Hashtable<>();
                 String selectedBeer = spinner.getSelectedItem().toString();
                 beerToDisplay = BeerExpert.recommend(selectedBeer);
                 for(int i = 0; i<beerToDisplay.size(); i++){
-                    int image =
-                    adapter.addElement(,beerToDisplay.get(i));
+                    int image = beerToDisplay.get(beerToDisplay.get(i));
+                    adapter.addElement(image, String.valueOf(beerToDisplay.get(i)));
                 }
 
 
