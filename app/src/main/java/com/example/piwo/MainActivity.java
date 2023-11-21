@@ -1,7 +1,12 @@
 package com.example.piwo;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Layout;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Spinner;
 
@@ -11,8 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private Adapter adapter;
@@ -31,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recycler);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 5));
+
         dataSet = new ArrayList<>();
         dataSetnames = new ArrayList<>();
 
@@ -48,30 +56,52 @@ public class MainActivity extends AppCompatActivity {
         List<Integer> dataSet = new ArrayList<>();
         List<String> dataSetnames = new ArrayList<>();
 
+
 //        for (Beer beer : beerList) {
 //            dataSet.add(beer.getImageResource());
 //            dataSetnames.add(beer.getName());
 //        }
 
 
-        adapter = new Adapter(dataSet, dataSetnames);
+
 
 
         addButton = findViewById(R.id.button);
-
+        @SuppressLint({"MissingInflatedId", "LocalSuppress"}) Button rotateBtn = findViewById(R.id.rotateBtn);
+        rotateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Animation rotate = AnimationUtils.loadAnimation(this, R.)
+            }
+        });
+//        public void startRotationAnimation(View view) {
+//            // Load the animation
+//            Animation rotationAnimation = AnimationUtils.loadAnimation(this, R.anim.rotate_animation);
+//
+//            // Find the ImageView to apply the animation
+//            Layout rotatingImageView = findViewById(R.id.item.xml);
+//
+//            // Start the animation
+//            rotatingImageView.startAnimation(rotationAnimation);
+//        }
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dictionary<String,Integer> beerToDisplay = new Hashtable<>();
+                Map<String, Integer> beerToDisplay = new HashMap<String, Integer>();
+                //Dictionary<String,Integer> beerToDisplay = new Hashtable<>();
                 String selectedBeer = spinner.getSelectedItem().toString();
                 beerToDisplay = BeerExpert.recommend(selectedBeer);
-                for(int i = 0; i<beerToDisplay.size(); i++){
-                    int image = beerToDisplay.get(beerToDisplay.get(i));
-                    adapter.addElement(image, String.valueOf(beerToDisplay.get(i)));
+
+                adapter = new Adapter(dataSet, dataSetnames);
+
+                for(String key : beerToDisplay.keySet()) {
+                    int value = beerToDisplay.get(key);
+                    Log.e("mainTest2",key + ": " + value);
+                    adapter.addElement(value, key);
+
                 }
-
-
+                recyclerView.setAdapter(adapter);
             }
         });
     }

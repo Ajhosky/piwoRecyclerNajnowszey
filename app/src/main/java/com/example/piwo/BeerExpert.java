@@ -1,9 +1,13 @@
 package com.example.piwo;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class BeerExpert {
@@ -28,9 +32,9 @@ public class BeerExpert {
 //        return recommendedBeer;
 //    }
 
-    public static Dictionary<String, Integer> recommend(String chosenBeer){
+    public static Map<String, Integer> recommend(String chosenBeer){
 
-        Dictionary<String, Integer> dict= new Hashtable<>();
+        Map<String, Integer> dict= new HashMap<String, Integer>();
         dict.put("IPA", R.drawable.piwo1);
         dict.put("Stout", R.drawable.piwo2);
         dict.put("Pilsner", R.drawable.piwo3);
@@ -42,17 +46,17 @@ public class BeerExpert {
         dict.put("Pale Ale", R.drawable.piwo9);
 
 
-//        List<Beer> beerList = new ArrayList<>();
-//        beerList.add(new Beer("IPA", R.drawable.piwo1));
-//        beerList.add(new Beer("Stout", R.drawable.piwo2));
-//        beerList.add(new Beer("Pilsner", R.drawable.piwo3));
-//        beerList.add(new Beer("Lager", R.drawable.piwo4));
-//        beerList.add(new Beer("Wheat Beer", R.drawable.piwo5));
-//        beerList.add(new Beer("Porter", R.drawable.piwo6));
-//        beerList.add(new Beer("Sour Ale", R.drawable.piwo7));
-//        beerList.add(new Beer("Amber Ale", R.drawable.piwo8));
-//        beerList.add(new Beer("Pale Ale", R.drawable.piwo9));
-//
+        /*List<Beer> beerList = new ArrayList<>();
+        beerList.add(new Beer("IPA", R.drawable.piwo1));
+        beerList.add(new Beer("Stout", R.drawable.piwo2));
+        beerList.add(new Beer("Pilsner", R.drawable.piwo3));
+        beerList.add(new Beer("Lager", R.drawable.piwo4));
+        beerList.add(new Beer("Wheat Beer", R.drawable.piwo5));
+        beerList.add(new Beer("Porter", R.drawable.piwo6));
+        beerList.add(new Beer("Sour Ale", R.drawable.piwo7));
+        beerList.add(new Beer("Amber Ale", R.drawable.piwo8));
+        beerList.add(new Beer("Pale Ale", R.drawable.piwo9));*/
+
         List<String> beerListNames = new ArrayList<>();
         beerListNames.add("IPA");
         beerListNames.add("Stout");
@@ -81,7 +85,7 @@ public class BeerExpert {
                 beerToRecommend.add(x);
             }
         }
-        Dictionary<String, Integer> recommendedBeer= new Hashtable<>();
+        Map<String, Integer> recommendedBeer= new HashMap<String,Integer>();
         //List<String> recommendedBeer = new ArrayList<>();
 
         Random rand = new Random();
@@ -90,15 +94,20 @@ public class BeerExpert {
         for (int i = 0; i < 4; i++){
 
             if (chosenNumbers.contains(randomNum)){
-                randomNum = rand.nextInt(beerListNames.size()) -1;
+                randomNum = rand.nextInt(beerListNames.size());
             }else{
                 chosenNumbers.add(randomNum);
             }
+            //Log.e("test1" , recommendedBeer.toString());
+            //Log.e("test1" , beerToRecommend.get(randomNum));
+
             recommendedBeer.put(beerToRecommend.get(randomNum),imageList.get(randomNum) );
         }
 
-        return recommendedBeer;
+        return (Map<String, Integer>) recommendedBeer;
     }
+
+
 //    public static List<Integer> recommendImg(Integer chosenBeer){
 //
 //        List<Beer> beerList = new ArrayList<>();
